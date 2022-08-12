@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="row m-4">
+    <div class="col">
+        <form method="POST" class="form-inline"> {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
+</div>
+
+    <ul class="list-group m-5">
+        {% for item in objects %}
+        <li class="list-group-item">{{forloop.counter}} - {{item }}
+          <div class="float-end">
+              <a href="{% url 'update-item' item.id %}" class="btn btn-sm btn-success">Edit</a>
+              <a href="{% url 'delete-item' item.id %}" class="btn btn-sm btn-danger">Delete</a>
+          </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
